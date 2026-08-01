@@ -13,7 +13,7 @@ lain bergantung pada data warga.
 |---|---|---|
 | **Tanpa login (publik)** | Beranda, Data Warga, Tabungan, Kas RT, Arisan (peserta/panggonan/periode/setoran/kocokan), Iuran Bulanan & Kematian, Gudang RT, Pengumuman | Kirim Pengaduan baru |
 | **Sekretaris** | Semua yang publik lihat + Daftar Pengaduan, Surat-Menyurat | Pengumuman, tanggapan Pengaduan, Surat-Menyurat (buat & cetak) |
-| **Bendahara** | Semua yang publik lihat + Daftar Pengaduan | Iuran Bulanan, Iuran Kematian, Kas RT, **Arisan** (kocok, peserta, periode, panggonan, setoran), **Gudang RT** (barang & peminjaman) |
+| **Bendahara** | Semua yang publik lihat + Daftar Pengaduan | Iuran Bulanan, Iuran Kematian, Kas RT, **Arisan** (kocok, peserta, periode, panggonan, setoran), **Gudang RT** (barang & peminjaman), **Koperasi Syariah** (pinjaman & angsuran) |
 | **Admin** | Semua | Semua modul + Pengguna, Log Aktivitas, Backup, Pengaturan (menu **Utility**) |
 
 > **Tabungan** dan **Data Warga** sengaja **admin-only secara default** (beda dari modul lain yang otomatis kebagian bendahara/sekretaris) — kalau mau bendahara/sekretaris tertentu bisa kelola itu, berikan lewat **Akses Tambahan** (lihat Fase 5), bukan berlaku otomatis ke semua orang dengan role itu.
@@ -67,11 +67,12 @@ Aktifkan sesuai kebutuhan RT — tidak semua RT pakai semua modul di fase ini.
 
 ## Fase 4 — Layanan & Aset Warga
 
-Menu **Pengaduan**, **Pengumuman**, **Iuran**, **Gudang RT**, dan **Surat-Menyurat** digabung jadi satu grup sidebar **"Layanan Warga"**.
+Menu **Pengaduan**, **Pengumuman**, **Iuran**, **Koperasi Syariah**, **Gudang RT**, dan **Surat-Menyurat** digabung jadi satu grup sidebar **"Layanan Warga"**.
 
 - [ ] **Pengaduan** — sosialisasikan ke warga bahwa mereka bisa lapor tanpa login lewat menu Pengaduan; pengurus (sekretaris/admin) menanggapi lewat **Daftar Pengaduan**.
 - [ ] **Pengumuman** — buat lewat Layanan Warga → Pengumuman → Buat Pengumuman (judul, isi, tanggal mulai/selesai). Bisa dilihat semua warga tanpa login, otomatis dapat label **Akan Datang / Berlangsung / Berakhir** sesuai tanggalnya. Edit/hapus hanya sekretaris/admin.
 - [ ] **Iuran Bulanan & Iuran Kematian** — dibuka publik supaya semua warga bisa lihat siapa yang belum bayar dan saling mengingatkan, sama seperti transparansi Kas RT/Arisan. Tombol catat/batalkan pembayaran tetap terkunci khusus bendahara/admin (`requireRole('keuangan')`) — pengunjung publik & role lain cuma bisa lihat status, tidak ada tombol aksi yang muncul.
+- [ ] **Koperasi Syariah (Qardhul Hasan)** — pinjaman kebajikan tanpa bunga/riba. Bendahara catat pinjaman baru (warga, jumlah, keperluan, tanggal), lalu catat angsuran tiap kali warga bayar. Sistem **otomatis menolak** kalau angsuran yang diinput melebihi sisa pokok — jadi tidak mungkin ada tambahan di luar pokok yang dipinjam, sesuai akad Qardhul Hasan. Status otomatis jadi "Lunas" begitu total angsuran sama dengan pokok pinjaman. Dibuka publik juga supaya warga bisa saling mengingatkan siapa yang masih punya pinjaman berjalan.
 - [ ] **Gudang RT** — kalau RT punya inventaris (tenda, kursi, sound system, dll) yang sering dipinjam warga, catat barang & riwayat peminjamannya di sini. Dibuka publik juga, jadi siapa saja bisa lihat barang apa yang sedang dipinjam siapa & belum dikembalikan — supaya warga bisa saling mengingatkan. Tombol tambah/edit/hapus barang & catat pinjam/kembali tetap khusus bendahara/admin.
 - [ ] **Surat-Menyurat** — beda dari modul lain, halaman ini **wajib login** (sekretaris/admin) dan **tidak publik**, karena isinya data pribadi warga (NIK, alasan mengurus SKTM, dll). Alurnya: Layanan Warga → Surat-Menyurat → Buat Surat → pilih warga pemohon, jenis surat (Pengantar/Domisili/SKTM/Usaha/Lainnya), isi keperluan → sistem otomatis bikin nomor surat & render PDF siap cetak dengan kop surat sesuai data di Pengaturan Umum (nama RT, alamat, nama Ketua RT). Riwayat surat yang pernah diterbitkan bisa dicek & dicetak ulang kapan saja. Kalau butuh jenis surat lain, pilih **"Surat Keterangan Lainnya"** lalu tulis isinya bebas.
 
